@@ -11,7 +11,6 @@ public class TextScoreParticle : MonoBehaviour
     void Start()
     {
         transform.localScale = Vector3.one * AdjustScreenScale.Instance.scaleFactor;
-        Init(value_s:"666");
     }
     public void Init(int value = int.MinValue, string value_s = null, Color? color = null, TextParticleType textParticleType = TextParticleType.DropDown)
     {
