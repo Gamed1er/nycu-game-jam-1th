@@ -9,6 +9,9 @@ public class Lever : TileData
         tileGameObject.IsPowered = !tileGameObject.IsPowered;
         PowerSystem.Instance.Recalculate();
         Player.Instance.energy -= 1;
-        if(Player.Instance.energy <= 0) Player.Instance.StartCoroutine(Player.Instance.PlayerDiedIEnum(Player.Instance.transform.position));
+        if (Player.Instance.energy <= 0)
+        {
+            Player.Instance.StartCoroutine(Player.Instance.PlayerDiedIEnum(Player.Instance.transform.position));
+        }
     }
 }

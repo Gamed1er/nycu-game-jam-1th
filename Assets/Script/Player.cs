@@ -55,7 +55,16 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Suicide");
                 ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
                 energy--;
-                if(energy <= 0) StartCoroutine(PlayerDiedIEnum(transform.position));
+                if (energy <= 0) 
+                {
+                    anim.SetBool("isDead", true);
+                    print("sui");
+                    StartCoroutine(PlayerDiedIEnum(transform.position, true));
+                };
+            }
+            else
+            {
+                anim.SetBool("isWalking",false);
             }
         }
     }
@@ -84,6 +93,7 @@ public class Player : MonoBehaviour
     void PlayBlockedAnim()
     {
         Debug.Log("撞牆動畫");
+        anim.SetBool("isWalking",false );
     }
 
     void OnCharge()
@@ -91,39 +101,64 @@ public class Player : MonoBehaviour
         Debug.Log("充電");
     }
 
-    IEnumerator PlayMoveAnimIEnum(MoveResult moveResult) 
+    IEnumerator PlayMoveAnimIEnum(MoveResult moveResult)
     {
-        // 1. Prevent input at the start
         player_can_control = false;
-        if (anim != null) {
-            anim.SetTrigger("Walk"); // 這裡填入你在 Animator 參數面板設定的名字
+
+        if (anim != null && anim.GetBool("isWalking") == false)
+        {
+            anim.SetBool("isWalking", true);
+            print("iswalking");
         }
 
         Vector3 ori_pos = transform.position;
-        Vector3 target_pos = moveResult.targetWorldPos; // Example property
-        float elapsed = 0;
-        float duration = 0.1f * Vector3.Distance(ori_pos, target_pos); // Seconds the move takes
+        Vector3 target_pos = moveResult.targetWorldPos;
 
-        // 2. The Animation Loop (Linear Interpolation)
+        float distance = Vector3.Distance(ori_pos, target_pos);
+        float duration = 0.1f * distance;
+        float elapsed = 0f;
+
         while (elapsed < duration)
         {
-            transform.position = Vector3.Lerp(ori_pos, target_pos, elapsed / duration);
+            transform.position = Vector3.Lerp(
+                ori_pos,
+                target_pos,
+                elapsed / duration
+            );
             elapsed += Time.deltaTime;
-            yield return null; // Wait for the next frame
+            yield return null;
         }
 
-        // 3. Ensure the final position is exact
         transform.position = target_pos;
 
-        // 4. Player Dead
-        if(energy <= 0) yield return PlayerDiedIEnum(moveResult.targetWorldPos);
-        else player_can_control = true;
+        if (energy <= 0)
+        {
+            print("dead");
+            anim.SetBool("isDead", true);
+            yield return PlayerDiedIEnum(moveResult.targetWorldPos, false);
+        }
+        else
+        {
+            player_can_control = true;
+        }
     }
 
-    public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos)
+
+    public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
+        if (longerAnimation)
+        {
+            print("longer");
+            yield return new WaitForSeconds(0.5f);
+        }
+        print("wait");
+        print(anim.GetBool("isDead"));
+        yield return new WaitForSeconds(1.1f);
+        anim.SetBool("isDead", false);
+        print("endwait");
         TileManager.Instance.SpawnCorpse(targetWorldPos);
-        yield return null;
+
+
         transform.position = spawnPoint;
         energy = 3;
         player_can_control = true;
