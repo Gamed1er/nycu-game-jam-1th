@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01b931c216fdfb4b8de57e8a36d19ad, type: 3}
   m_Name: SpawnPoint
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 80961de7ff2c68d4cadb80ecfad27fa0, type: 3}
+  m_Color: {r: 0.4584905, g: 1, b: 0.99888504, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,10 +31,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 941153151918755350, guid: 84076d1fefed46b4a81d5156b0bc974e, type: 3}
   m_Flags: 1
   m_ColliderType: 1
   ableToMove: 1
   cost: 0
-  chargeStation: 0
   surfaceType: 0

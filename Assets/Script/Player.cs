@@ -18,8 +18,14 @@ public class Player : MonoBehaviour
     {
         if (player_can_control)
         {
-            if (Input.GetKeyDown(KeyCode.A)) RequestMove(Vector2Int.left);
-            else if (Input.GetKeyDown(KeyCode.D)) RequestMove(Vector2Int.right);
+            if (Input.GetKeyDown(KeyCode.A)){
+                transform.localScale = new Vector3(-1, 1, 1);
+                RequestMove(Vector2Int.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.D)){
+                transform.localScale = new Vector3(1, 1, 1);
+                RequestMove(Vector2Int.right);
+            }
             else if (Input.GetKeyDown(KeyCode.S)) RequestMove(Vector2Int.down);
             else if (Input.GetKeyDown(KeyCode.W)) RequestMove(Vector2Int.up);
         }
@@ -60,6 +66,10 @@ public class Player : MonoBehaviour
     {
         // 1. Prevent input at the start
         player_can_control = false;
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) {
+            anim.SetTrigger("Walk"); // 這裡填入你在 Animator 參數面板設定的名字
+        }
 
         Vector3 ori_pos = transform.position;
         Vector3 target_pos = moveResult.targetWorldPos; // Example property

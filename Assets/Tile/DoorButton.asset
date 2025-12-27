@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c0539d1637ed748af0e350aa02c999, type: 3}
   m_Name: DoorButton
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 1c3429299fc88b448aca450b5933a676, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3f1bfa1a074fccc46af784315e25fe6c, type: 3}
   m_Color: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 1}
   m_Transform:
     e00: 1
@@ -31,11 +31,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 941153151918755350, guid: 84076d1fefed46b4a81d5156b0bc974e, type: 3}
   m_Flags: 1
   m_ColliderType: 1
   ableToMove: 1
   cost: 0
-  chargeStation: 0
-  surfaceType: 0
-  doorPos: {x: 0, y: 0}
+  surfaceType: 2

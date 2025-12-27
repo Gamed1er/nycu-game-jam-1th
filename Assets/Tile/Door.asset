@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d43fb70d345d94295ec583faadb5b2, type: 3}
   m_Name: Door
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: a54dcf90eff522d46ab7893038dd3006, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1abb9d49f7d64c140998d266190e7d3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,12 +31,11 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 941153151918755350, guid: 84076d1fefed46b4a81d5156b0bc974e, type: 3}
   m_Flags: 1
   m_ColliderType: 1
-  ableToMove: 1
+  ableToMove: 0
   cost: 0
-  chargeStation: 0
-  surfaceType: 0
-  DoorClose: {fileID: 21300000, guid: 1c3429299fc88b448aca450b5933a676, type: 3}
-  DoorOpen: {fileID: 21300000, guid: a54dcf90eff522d46ab7893038dd3006, type: 3}
+  surfaceType: 4
+  doorClose: {fileID: 21300000, guid: 1abb9d49f7d64c140998d266190e7d3d, type: 3}
+  doorOpen: {fileID: 21300000, guid: 39e9f192f110b044b8df235dcb2eab0e, type: 3}
