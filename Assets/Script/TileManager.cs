@@ -36,6 +36,14 @@ public class TileManager : MonoBehaviour
             result.canMove = false;
             return result;
         }
+        foreach(GameObject c in Corpses)
+        {
+            if(c == null || c.transform.position == targetCell)
+            {
+                result.canMove = false;
+                return result;
+            }
+        }
 
         // 玩家踩上去的效果
         currentTile.OnEntityExit();
@@ -59,14 +67,17 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
-    public void SpawnCorpse(Transform location)
+    public void SpawnCorpse(Vector3 location)
     {
         if(Corpses.Count >= max_corpse_count)
         {
             KillCorpse(Corpses[0]);
-            
+            Corpses.Remove(Corpses[0]);
         }
-        Corpses.Add(Instantiate(CorpsePrefab, location.position, location.rotation, CorpseParent));
+        Corpses.Add(Instantiate(CorpsePrefab, location, Quaternion.identity, CorpseParent));
+        Vector3Int currentCell = tilemap.WorldToCell(location);
+        TileData currentTile = tilemap.GetTile<TileData>(currentCell);
+        currentTile.OnEntityEnter();
     }
 
     public void KillCorpse(GameObject target)

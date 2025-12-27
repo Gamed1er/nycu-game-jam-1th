@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         PlayMoveAnim(result);
 
         energy -= result.total_cost;
+        
     }
 
     void PlayMoveAnim(MoveResult moveResult)
@@ -78,6 +79,19 @@ public class Player : MonoBehaviour
 
         // 4. Re-enable control only after the animation is finished
         player_can_control = true;
+
+        // 5. Player Dead
+        if(energy <= 0) yield return PlayerDiedIEnum(moveResult);
     }
 
+    IEnumerator PlayerDiedIEnum(MoveResult moveResult)
+    {
+        if(energy <= 0)
+        {
+            TileManager.Instance.SpawnCorpse(moveResult.targetWorldPos);
+        }
+        yield return null;
+        transform.position = spawnPoint;
+        energy = 3;
+    }
 }
