@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0356a1ece2934f44afcdd5d8aafb9f6, type: 3}
   m_Name: Quack
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 57d0d624c2971bc42a8e33b0549509c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,9 +31,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 941153151918755350, guid: 84076d1fefed46b4a81d5156b0bc974e, type: 3}
   m_Flags: 1
   m_ColliderType: 1
-  ableToMove: 1
+  ableToMove: 0
   cost: 0
   surfaceType: 0
