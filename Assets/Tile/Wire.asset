@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21d43fb70d345d94295ec583faadb5b2, type: 3}
-  m_Name: Door
+  m_Script: {fileID: 11500000, guid: f389dc9693de02249b2dd33f1fc7dd3b, type: 3}
+  m_Name: Wire
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: a54dcf90eff522d46ab7893038dd3006, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,9 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  ableToMove: 1
-  cost: 0
-  chargeStation: 0
-  surfaceType: 0
-  DoorClose: {fileID: 21300000, guid: 1c3429299fc88b448aca450b5933a676, type: 3}
-  DoorOpen: {fileID: 21300000, guid: a54dcf90eff522d46ab7893038dd3006, type: 3}
+  powered: 0

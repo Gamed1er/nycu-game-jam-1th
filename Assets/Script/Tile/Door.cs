@@ -1,21 +1,21 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Door", menuName = "Tile/Door")]
-public class Door : TileData
+public class Door : TileData, IPowerReceiver
 {
-    public Sprite DoorClose, DoorOpen;
-    public SpriteRenderer spriteRenderer;
-    public void ControlDoor(bool is_open)
+    public Sprite doorClose, doorOpen;
+
+    public void OnPowerChanged(bool powered)
     {
-        if (is_open)
+        if (powered)
         {
-            spriteRenderer.sprite = DoorOpen;
+            sprite = doorOpen;
             ableToMove = true;
         }
         else
         {
-            spriteRenderer.sprite = DoorClose;
-            ableToMove = true;
+            sprite = doorClose;
+            ableToMove = false;
         }
     }
 }

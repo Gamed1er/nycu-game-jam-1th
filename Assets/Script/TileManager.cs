@@ -5,7 +5,7 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager Instance;
 
-    public Tilemap tilemap;
+    public Tilemap tilemap, wireMap;
 
     void Awake()
     {
