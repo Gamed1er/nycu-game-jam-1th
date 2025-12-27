@@ -47,7 +47,7 @@ public class PowerSystem : MonoBehaviour
             foreach (var dir in dirs)
             {
                 Vector3Int next = pos + dir;
-                if (IsWire(next))
+                if (IsConductive(next))
                     queue.Enqueue(next);
             }
         }
@@ -122,4 +122,21 @@ public class PowerSystem : MonoBehaviour
             );
         }
     }
+
+    bool IsConductive(Vector3Int pos)
+    {
+        // 1. 電線
+        if (IsWire(pos)) return true;
+
+        // 2. 屍體
+        foreach (var corpse in TileManager.Instance.Corpses)
+        {
+            if (corpse == null) continue;
+            if (tileMap.WorldToCell(corpse.transform.position) == pos)
+                return true;
+        }
+
+        return false;
+    }
+
 }

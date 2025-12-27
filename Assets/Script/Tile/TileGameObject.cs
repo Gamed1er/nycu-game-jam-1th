@@ -21,7 +21,7 @@ public class TileGameObject : MonoBehaviour
     void Start()
     {
         
-        if(transform.parent.name == "WireMap")
+        if(transform.parent.name != "TileMap")
         {
             tileData = wire;
         }
