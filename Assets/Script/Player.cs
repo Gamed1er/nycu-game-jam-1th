@@ -8,10 +8,11 @@ public class Player : MonoBehaviour
     public int energy = 3;
 
     public Vector3 spawnPoint = new(0, 0, 0);
-
+    Animator anim;
     void Awake()
     {
         Instance = this;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
             else if (Input.GetKey(KeyCode.W)) RequestMove(Vector2Int.up);
             else if (Input.GetKeyDown(KeyCode.Z))
             {
+                anim.SetTrigger("Suicide");
                 ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
                 energy--;
                 if(energy <= 0) StartCoroutine(PlayerDiedIEnum(new MoveResult(false, transform.position, 0, SurfaceType.Normal)));
@@ -72,7 +74,6 @@ public class Player : MonoBehaviour
     {
         // 1. Prevent input at the start
         player_can_control = false;
-        Animator anim = GetComponent<Animator>();
         if (anim != null) {
             anim.SetTrigger("Walk"); // 這裡填入你在 Animator 參數面板設定的名字
         }
