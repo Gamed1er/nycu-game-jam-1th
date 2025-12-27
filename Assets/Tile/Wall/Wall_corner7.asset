@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66cc1d3c1d9e50d4181ed2ea474f702d, type: 3}
-  m_Name: Ice
+  m_Name: Wall_corner7
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 18510ab36b63eeb4f98e07d46d6b1cd9, type: 3}
-  m_Color: {r: 0.5641509, g: 1, b: 0.9991026, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4f9c8f97b85474140b4e404fbac43046, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,10 +31,10 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 4552569156703349250, guid: ce46d3ffb3041024fb2d87233f5e98d9, type: 3}
+  m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  ableToMove: 1
+  ableToMove: 0
   cost: 0
   chargeStation: 0
-  surfaceType: 1
+  surfaceType: 0
