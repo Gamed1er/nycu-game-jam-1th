@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     bool player_can_control = true;
     public int energy = 3;
 
+    public Vector3 spawnPoint = new(0, 0, 0);
+
     void Awake()
     {
         Instance = this;
