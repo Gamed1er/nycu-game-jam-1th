@@ -9,25 +9,30 @@ public class TileData : Tile
     public int cost = 0;
 
     [Header("Special")]
-    public bool chargeStation;
     
     public SurfaceType surfaceType;
 
-    public virtual void OnEntityEnter()
+    public virtual void OnEntityEnter(TileGameObject tileGameObject)
     {
         
     }
 
-    public virtual void OnEntityExit()
+    public virtual void OnEntityExit(TileGameObject tileGameObject)
     {
         
     }
     
+    public virtual void OnPowerChanged(TileGameObject tileGameObject, bool powered)
+    {
+        
+    }
 }
 
 public enum SurfaceType
 {
     Normal,
     Ice,
-    Mud
+    Power_In,
+    Power_Node,
+    Power_Out
 }

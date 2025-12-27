@@ -6,88 +6,126 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager Instance;
 
-    public Tilemap tilemap, wireMap;
+    public Tilemap tilemap;
 
-    [Header("屍體")]
-    public List<GameObject> Corpses;
+    [Header("Tile Objects")]
+    public Dictionary<Vector3Int, TileGameObject> tileObjects = new();
+
+    [Header("Corpses")]
+    public List<GameObject> Corpses = new();
     public GameObject CorpsePrefab;
     public int max_corpse_count = 5;
     public Transform CorpseParent;
 
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
+    #region TileGameObject 管理
+
+    public void RegisterTileObject(Vector3Int cellPos, TileGameObject obj)
+    {
+        tileObjects[cellPos] = obj;
+    }
+
+    public TileGameObject GetTileObject(Vector3Int cellPos)
+    {
+        tileObjects.TryGetValue(cellPos, out var obj);
+        return obj;
+    }
+
+    #endregion
+
+    #region Movement
+
     public MoveResult TryMove(Vector3 worldPos, Vector2Int dir)
     {
         Vector3Int currentCell = tilemap.WorldToCell(worldPos);
-        Vector3Int targetCell = currentCell + new Vector3Int(dir.x, dir.y, 0);
+        Vector3Int targetCell  = currentCell + new Vector3Int(dir.x, dir.y, 0);
 
-        TileData currentTile = tilemap.GetTile<TileData>(currentCell);
-        TileData targetTile = tilemap.GetTile<TileData>(targetCell);
+        TileGameObject currentTile = GetTileObject(currentCell);
+        TileGameObject targetTile  = GetTileObject(targetCell);
 
-        MoveResult result = new MoveResult(true, tilemap.GetCellCenterWorld(currentCell), 0, currentTile.surfaceType);
-
-        // 無法通過
+        // 沒有 TileGameObject = 視為不可走
         if (targetTile == null || !targetTile.ableToMove)
+            return new MoveResult(false, worldPos, 0, SurfaceType.Normal);
+
+        // 屍體阻擋
+        foreach (GameObject c in Corpses)
         {
-            result.canMove = false;
-            return result;
-        }
-        foreach(GameObject c in Corpses)
-        {
-            if(c == null || c.transform.position == targetCell)
-            {
-                result.canMove = false;
-                return result;
-            }
+            if (c == null) continue;
+            if (tilemap.WorldToCell(c.transform.position) == targetCell)
+                return new MoveResult(false, worldPos, 0, SurfaceType.Normal);
         }
 
-        // 玩家踩上去的效果
-        currentTile.OnEntityExit();
-        targetTile.OnEntityEnter();
-        
-        // 可以通過
+        // 觸發 Enter / Exit
+        currentTile?.tileData.OnEntityExit(currentTile);
+        targetTile.tileData.OnEntityEnter(targetTile);
+
+        // Ice 滑行處理
         if (targetTile.surfaceType == SurfaceType.Ice)
         {
-            result = TryMove(targetCell, dir);
-            result.canMove = true;
+            MoveResult slide = TryMove(
+                tilemap.GetCellCenterWorld(targetCell),
+                dir
+            );
+
+            if (!slide.canMove)
+            {
+                return new MoveResult(
+                    true,
+                    tilemap.GetCellCenterWorld(targetCell),
+                    targetTile.cost,
+                    targetTile.surfaceType
+                );
+            }
+
+            slide.total_cost += targetTile.cost;
+            return slide;
         }
-        else
-        {
-            result.canMove = true;
-            result.targetWorldPos = tilemap.GetCellCenterWorld(targetCell);
-            result.total_cost += targetTile.cost;
-            result.surfaceType = targetTile.surfaceType;
-        }
-        
-        // 執行被踩過的效果
-        return result;
+
+        // 正常移動
+        return new MoveResult(
+            true,
+            tilemap.GetCellCenterWorld(targetCell),
+            targetTile.cost,
+            targetTile.surfaceType
+        );
     }
+
+    #endregion
+
+    #region Corpse
 
     public void SpawnCorpse(Vector3 location)
     {
-        if(Corpses.Count >= max_corpse_count)
+        if (Corpses.Count >= max_corpse_count)
         {
             KillCorpse(Corpses[0]);
-            Corpses.Remove(Corpses[0]);
+            Corpses.RemoveAt(0);
         }
-        Corpses.Add(Instantiate(CorpsePrefab, location, Quaternion.identity, CorpseParent));
-        Vector3Int currentCell = tilemap.WorldToCell(location);
-        TileData currentTile = tilemap.GetTile<TileData>(currentCell);
-        currentTile.OnEntityEnter();
+
+        GameObject corpse = Instantiate(CorpsePrefab, location, Quaternion.identity, CorpseParent);
+        Corpses.Add(corpse);
+
+        Vector3Int cell = tilemap.WorldToCell(location);
+        GetTileObject(cell)?.tileData.OnEntityEnter(GetTileObject(cell));
     }
 
     public void KillCorpse(GameObject target)
     {
-        Vector3Int currentCell = tilemap.WorldToCell(target.transform.position);
-        TileData currentTile = tilemap.GetTile<TileData>(currentCell);
-        currentTile.OnEntityExit();
+        if (target == null) return;
+
+        Vector3Int cell = tilemap.WorldToCell(target.transform.position);
+        GetTileObject(cell)?.tileData.OnEntityExit(GetTileObject(cell));
+
         Destroy(target);
     }
+
+    #endregion
 }
+
 
 public struct MoveResult
 {

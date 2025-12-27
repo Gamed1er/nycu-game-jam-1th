@@ -1,19 +1,20 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DoorButton", menuName = "Tile/DoorButton")]
-public class DoorButton : TileData, IPowerSource
+public class DoorButton : TileData
 {
     public bool IsPowered { get; private set; }
 
-    public override void OnEntityEnter()
+    public override void OnEntityEnter(TileGameObject tileGameObject)
     {
-        IsPowered = true;
+        Debug.Log("ButtonPressed");
+        tileGameObject.IsPowered = true; 
         PowerSystem.Instance.Recalculate();
     }
 
-    public override void OnEntityExit()
+    public override void OnEntityExit(TileGameObject tileGameObject)
     {
-        IsPowered = false;
+        tileGameObject.IsPowered = false;
         PowerSystem.Instance.Recalculate();
     }
 }

@@ -5,98 +5,121 @@ using UnityEngine.Tilemaps;
 public class PowerSystem : MonoBehaviour
 {
     public static PowerSystem Instance;
-    public Tilemap wireMap; // 專門放電線的 Tilemap
-    public Tilemap componentMap; // 放電源和接收器的 Tilemap
 
-    // 紀錄目前哪些位置是有電的
-    private HashSet<Vector3Int> poweredPositions = new HashSet<Vector3Int>();
+    [Header("Tilemaps")]
+    public Tilemap tileMap;   // 放 Power_In / Power_Out
+    public Tilemap wireMap;   // 放 Power_Node
 
-    private void Awake() => Instance = this;
+    // 哪些電線格目前是有電的（純系統狀態）
+    private HashSet<Vector3Int> poweredWires = new HashSet<Vector3Int>();
 
-    private static readonly Vector3Int[] dirs = {
-        Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right
+    private static readonly Vector3Int[] dirs =
+    {
+        Vector3Int.up,
+        Vector3Int.down,
+        Vector3Int.left,
+        Vector3Int.right
     };
 
-    [ContextMenu("Recalculate")]
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    // ======= 對外唯一入口 =======
     public void Recalculate()
     {
-        // 1. 初始化：清空舊電力狀態
-        poweredPositions.Clear();
-        Queue<Vector3Int> queue = new Queue<Vector3Int>();
-        HashSet<IPowerReceiver> activeReceivers = new HashSet<IPowerReceiver>();
+        poweredWires.Clear();
 
-        // 2. 第一步：尋找所有「電源 (IPowerSource)」作為起點
-        // 掃描 componentMap 範圍內的所有 Tile
-        foreach (var pos in componentMap.cellBounds.allPositionsWithin)
+        Queue<Vector3Int> queue = new Queue<Vector3Int>();
+        HashSet<Vector3Int> poweredOutputs = new HashSet<Vector3Int>();
+
+        // ---------- Step 1：找所有 Power_In ----------
+        foreach (var pair in TileManager.Instance.tileObjects)
         {
-            var tile = componentMap.GetTile(pos);
-            if (tile is IPowerSource source && source.IsPowered)
+            Vector3Int pos = pair.Key;
+            TileGameObject go = pair.Value;
+
+            if (go.surfaceType != SurfaceType.Power_In) continue;
+            if (!go.IsPowered) continue;
+
+            // 將相鄰電線加入 BFS 起點
+            foreach (var dir in dirs)
             {
-                // 將電源鄰近的電線加入傳導隊列
-                foreach (var dir in dirs)
-                {
-                    Vector3Int neighbor = pos + dir;
-                    if (wireMap.HasTile(neighbor)) queue.Enqueue(neighbor);
-                }
+                Vector3Int next = pos + dir;
+                if (IsWire(next))
+                    queue.Enqueue(next);
             }
         }
 
-        // 3. 第二步：擴散電力 (BFS 演算法)
+        // ---------- Step 2：BFS 傳電 ----------
         while (queue.Count > 0)
         {
             Vector3Int curr = queue.Dequeue();
-            if (poweredPositions.Contains(curr)) continue;
+            if (poweredWires.Contains(curr)) continue;
 
-            // 標記此電線位置有電
-            poweredPositions.Add(curr);
+            poweredWires.Add(curr);
 
-            // 檢查四個方向
             foreach (var dir in dirs)
             {
                 Vector3Int next = curr + dir;
 
-                // 如果是電線，繼續傳播
-                if (wireMap.HasTile(next) && !poweredPositions.Contains(next))
+                // 繼續沿著電線傳
+                if (IsWire(next) && !poweredWires.Contains(next))
                 {
                     queue.Enqueue(next);
                 }
-                
-                // 如果是接收器，標記為「待觸發」
-                var compTile = componentMap.GetTile(next);
-                if (compTile is IPowerReceiver receiver)
+
+                // 碰到輸出（門）
+                if (TryGetPowerOut(next, out TileGameObject outGO))
                 {
-                    activeReceivers.Add(receiver);
+                    poweredOutputs.Add(next);
                 }
             }
         }
 
-        // 4. 第三步：通知所有接收器
-        // 這裡你可以視需求優化：通知「所有」接收器目前是有電還是沒電
-        // 簡單做法：遍歷 componentMap 內所有接收器
-        foreach (var pos in componentMap.cellBounds.allPositionsWithin)
+        // ---------- Step 3：通知所有 Power_Out ----------
+        foreach (var pair in TileManager.Instance.tileObjects)
         {
-            if (componentMap.GetTile(pos) is IPowerReceiver r)
-            {
-                r.OnPowerChanged(activeReceivers.Contains(r));
-            }
+            Vector3Int pos = pair.Key;
+            TileGameObject go = pair.Value;
+
+            if (go.surfaceType != SurfaceType.Power_Out) continue;
+
+            bool powered = poweredOutputs.Contains(pos);
+            (go.tileData as Door)?.OnPowerChanged(go, powered);
         }
 
-        // (可選) 更新電線的視覺效果，例如切換顏色或動畫
-        UpdateWireVisuals();
+        // （可選）更新電線顯示
+        UpdateWireVisual();
     }
 
-    void UpdateWireVisuals()
+    // ======= 小工具 =======
+
+    bool IsWire(Vector3Int pos)
     {
-        // 遍歷所有電線，根據 poweredPositions 變更顏色
+        if (!wireMap.HasTile(pos)) return false;
+        TileData t = wireMap.GetTile<TileData>(pos);
+        return t != null && t.surfaceType == SurfaceType.Power_Node;
+    }
+
+    bool TryGetPowerOut(Vector3Int pos, out TileGameObject go)
+    {
+        go = TileManager.Instance.GetTileObject(pos);
+        return go != null && go.surfaceType == SurfaceType.Power_Out;
+    }
+
+    void UpdateWireVisual()
+    {
         foreach (var pos in wireMap.cellBounds.allPositionsWithin)
         {
-            if (wireMap.HasTile(pos))
-            {
-                bool isOn = poweredPositions.Contains(pos);
-                wireMap.SetColor(pos, isOn ? Color.yellow : Color.gray);
-                // 注意：Tilemap 的 Tile 必須設定 Flags 為 None 才能改顏色
-                wireMap.SetTileFlags(pos, TileFlags.None);
-            }
+            if (!IsWire(pos)) continue;
+
+            wireMap.SetTileFlags(pos, TileFlags.None);
+            wireMap.SetColor(
+                pos,
+                poweredWires.Contains(pos) ? Color.yellow : Color.gray
+            );
         }
     }
 }
