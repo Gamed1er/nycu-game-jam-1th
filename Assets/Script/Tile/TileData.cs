@@ -26,6 +26,11 @@ public class TileData : Tile
     {
         
     }
+
+    public virtual void OnPlayerUse(TileGameObject tileGameObject)
+    {
+        
+    }
 }
 
 public enum SurfaceType

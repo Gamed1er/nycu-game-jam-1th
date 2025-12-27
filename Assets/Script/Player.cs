@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public int energy = 3;
 
     public Vector3 spawnPoint = new(0, 0, 0);
+    public Vector3 playerNowDir = new(0, 0, 0);
     Animator anim;
     void Awake()
     {
@@ -19,22 +20,42 @@ public class Player : MonoBehaviour
     {
         if (player_can_control)
         {
-            if (Input.GetKey(KeyCode.A)){
+            if (Input.GetKey(KeyCode.A))
+            {
                 transform.localScale = new Vector3(-1, 1, 1);
+                playerNowDir = new(-1, 0, 0);
                 RequestMove(Vector2Int.left);
             }
-            else if (Input.GetKey(KeyCode.D)){
+            else if (Input.GetKey(KeyCode.D))
+            {
                 transform.localScale = new Vector3(1, 1, 1);
+                playerNowDir = new(1, 0, 0);
                 RequestMove(Vector2Int.right);
             }
-            else if (Input.GetKey(KeyCode.S)) RequestMove(Vector2Int.down);
-            else if (Input.GetKey(KeyCode.W)) RequestMove(Vector2Int.up);
+            else if (Input.GetKey(KeyCode.S))
+            {
+                playerNowDir = new(1, 0, 0);
+                RequestMove(Vector2Int.down);
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                playerNowDir = new(-1, 0, 0);
+                RequestMove(Vector2Int.up);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                Vector3Int currentCell = TileManager.Instance.tilemap.WorldToCell(transform.position);
+                Vector3Int targetCell  = currentCell + Vector3Int.FloorToInt(playerNowDir);
+
+                TileGameObject currentTile = TileManager.Instance.GetTileObject(targetCell);
+                currentTile.tileData.OnPlayerUse(currentTile);
+            }
             else if (Input.GetKeyDown(KeyCode.Z))
             {
                 anim.SetTrigger("Suicide");
                 ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
                 energy--;
-                if(energy <= 0) StartCoroutine(PlayerDiedIEnum(new MoveResult(false, transform.position, 0, SurfaceType.Normal)));
+                if(energy <= 0) StartCoroutine(PlayerDiedIEnum(transform.position));
             }
         }
     }
@@ -95,13 +116,13 @@ public class Player : MonoBehaviour
         transform.position = target_pos;
 
         // 4. Player Dead
-        if(energy <= 0) yield return PlayerDiedIEnum(moveResult);
+        if(energy <= 0) yield return PlayerDiedIEnum(moveResult.targetWorldPos);
         else player_can_control = true;
     }
 
-    IEnumerator PlayerDiedIEnum(MoveResult moveResult)
+    public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos)
     {
-        TileManager.Instance.SpawnCorpse(moveResult.targetWorldPos);
+        TileManager.Instance.SpawnCorpse(targetWorldPos);
         yield return null;
         transform.position = spawnPoint;
         energy = 3;
