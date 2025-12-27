@@ -6,13 +6,19 @@ public class TileData : Tile
 {
     [Header("Movement")]
     public bool ableToMove = true;
+    public int cost = 0;
 
     [Header("Special")]
     public bool chargeStation;
     
     public SurfaceType surfaceType;
 
-    public virtual void OnPlayerEnter()
+    public virtual void OnEntityEnter()
+    {
+        
+    }
+
+    public virtual void OnEntityExit()
     {
         
     }

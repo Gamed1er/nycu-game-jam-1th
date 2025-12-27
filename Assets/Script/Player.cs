@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
     bool player_can_control = true;
     public int energy = 3;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
         if (player_can_control)
@@ -26,11 +33,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //transform.position = result.targetWorldPos;
         PlayMoveAnim(result);
 
-        if (result.charge)
-            OnCharge();
+        energy -= result.total_cost;
     }
 
     void PlayMoveAnim(MoveResult moveResult)
