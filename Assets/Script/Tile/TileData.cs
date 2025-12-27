@@ -22,16 +22,7 @@ public class TileData : Tile
     {
         
     }
-
-    public virtual void OnElectricOpen()
-    {
-        
-    }
-
-    public virtual void OnElectricClose()
-    {
-        
-    }
+    
 }
 
 public enum SurfaceType
