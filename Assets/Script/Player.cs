@@ -18,16 +18,22 @@ public class Player : MonoBehaviour
     {
         if (player_can_control)
         {
-            if (Input.GetKeyDown(KeyCode.A)){
+            if (Input.GetKey(KeyCode.A)){
                 transform.localScale = new Vector3(-1, 1, 1);
                 RequestMove(Vector2Int.left);
             }
-            else if (Input.GetKeyDown(KeyCode.D)){
+            else if (Input.GetKey(KeyCode.D)){
                 transform.localScale = new Vector3(1, 1, 1);
                 RequestMove(Vector2Int.right);
             }
-            else if (Input.GetKeyDown(KeyCode.S)) RequestMove(Vector2Int.down);
-            else if (Input.GetKeyDown(KeyCode.W)) RequestMove(Vector2Int.up);
+            else if (Input.GetKey(KeyCode.S)) RequestMove(Vector2Int.down);
+            else if (Input.GetKey(KeyCode.W)) RequestMove(Vector2Int.up);
+            else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
+                energy--;
+                if(energy <= 0) StartCoroutine(PlayerDiedIEnum(new MoveResult(false, transform.position, 0, SurfaceType.Normal)));
+            }
         }
     }
 
@@ -87,21 +93,17 @@ public class Player : MonoBehaviour
         // 3. Ensure the final position is exact
         transform.position = target_pos;
 
-        // 4. Re-enable control only after the animation is finished
-        player_can_control = true;
-
-        // 5. Player Dead
+        // 4. Player Dead
         if(energy <= 0) yield return PlayerDiedIEnum(moveResult);
+        else player_can_control = true;
     }
 
     IEnumerator PlayerDiedIEnum(MoveResult moveResult)
     {
-        if(energy <= 0)
-        {
-            TileManager.Instance.SpawnCorpse(moveResult.targetWorldPos);
-        }
+        TileManager.Instance.SpawnCorpse(moveResult.targetWorldPos);
         yield return null;
         transform.position = spawnPoint;
         energy = 3;
+        player_can_control = true;
     }
 }
