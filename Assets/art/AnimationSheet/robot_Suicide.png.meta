@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26cf9d4fc5bc8f940a28f666b575f9b3
+guid: 55b921c6ebd08cd4e8620100f838670e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,49 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: oil3_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee94eed73ed8c5f4dbcd81b84d42eb12
-      internalID: 116643592
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: oil3_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0b22ab04a0120c4983a2095401de512
-      internalID: -431298625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: oil3_2
+      name: robot_sucide_0
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dc016c0e06c2334ca4e44f1faa4f5fb
-      internalID: 196826809
+      spriteID: c9d97acbba4c5da45a8302da9258f64b
+      internalID: -619776113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: oil3_3
+      name: robot_sucide_1
       rect:
         serializedVersion: 2
         x: 64
@@ -187,8 +145,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 923351454fff6a3418c4629529002f2c
-      internalID: 1350805614
+      spriteID: b562439e87ee5ea49a53043b5ed7e88e
+      internalID: 211624207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_sucide_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d798b3aa8eb3d2d4aa73821ca2a54998
+      internalID: 1372665793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_sucide_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 227306cc0daf1304c970190854a8e9f4
+      internalID: 1456048547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_sucide_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbcab2fccb24e4146bdbe8fff87944e4
+      internalID: 805479678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_sucide_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208fd19b8afe80b438064435630cf685
+      internalID: -1510847421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_sucide_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99453c1e883751146a1dedafa9970f9a
+      internalID: -397315815
       vertices: []
       indices: 
       edges: []
@@ -204,10 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      oil3_0: 116643592
-      oil3_1: -431298625
-      oil3_2: 196826809
-      oil3_3: 1350805614
+      robot_sucide_0: -619776113
+      robot_sucide_1: 211624207
+      robot_sucide_2: 1372665793
+      robot_sucide_3: 1456048547
+      robot_sucide_4: 805479678
+      robot_sucide_5: -1510847421
+      robot_sucide_6: -397315815
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
