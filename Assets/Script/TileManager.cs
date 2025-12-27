@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,6 +7,13 @@ public class TileManager : MonoBehaviour
     public static TileManager Instance;
 
     public Tilemap tilemap, wireMap;
+
+    [Header("屍體")]
+    public List<GameObject> Corpses;
+    public GameObject CorpsePrefab;
+    public int max_corpse_count = 5;
+    public Transform CorpseParent;
+
 
     void Awake()
     {
@@ -49,6 +57,24 @@ public class TileManager : MonoBehaviour
         
         // 執行被踩過的效果
         return result;
+    }
+
+    public void SpawnCorpse(Transform location)
+    {
+        if(Corpses.Count >= max_corpse_count)
+        {
+            KillCorpse(Corpses[0]);
+            
+        }
+        Corpses.Add(Instantiate(CorpsePrefab, location.position, location.rotation, CorpseParent));
+    }
+
+    public void KillCorpse(GameObject target)
+    {
+        Vector3Int currentCell = tilemap.WorldToCell(target.transform.position);
+        TileData currentTile = tilemap.GetTile<TileData>(currentCell);
+        currentTile.OnEntityExit();
+        Destroy(target);
     }
 }
 
