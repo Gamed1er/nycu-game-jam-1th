@@ -40,6 +40,11 @@ public class TileGameObject : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = tileData.sprite;
 
         name = tileData.name;
+
+        if(tileData.surfaceType == SurfaceType.Power_In || tileData.surfaceType == SurfaceType.Power_Out)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 3;
+        }
     }
 
 }
