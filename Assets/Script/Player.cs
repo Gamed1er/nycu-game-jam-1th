@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
         float duration = 0.1f * distance;
         float elapsed = 0f;
 
+
+
         while (elapsed < duration)
         {
             transform.position = Vector3.Lerp(
@@ -138,6 +140,9 @@ public class Player : MonoBehaviour
         }
 
         transform.position = target_pos;
+        yield return new WaitForSeconds(0.22f);
+        anim.SetBool("isWalking", false);
+
         yield return IsPlayerDieIEnum(target_pos);
     }
 
