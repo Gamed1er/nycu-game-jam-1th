@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d32544d5a97e4428b270c425d901be, type: 3}
   m_Name: Lever 1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 7b21901b285fdc74bbc3d9f431dfcb32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 379203d88ff498d448b40e38667fa4d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -38,3 +38,5 @@ MonoBehaviour:
   cost: 0
   surfaceType: 2
   IsPowered: 1
+  leverOn: {fileID: 21300000, guid: 379203d88ff498d448b40e38667fa4d9, type: 3}
+  leverOff: {fileID: 21300000, guid: cdbfc692a9b988c4f91f05ddf201f44a, type: 3}
