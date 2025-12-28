@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66cc1d3c1d9e50d4181ed2ea474f702d, type: 3}
-  m_Name: Box2-1
+  m_Name: Wall_vertical
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -609943134, guid: bf5968e0447a8f947bda317d41661173, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1570e77d90a3364e8f355de5520d40e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -36,5 +36,5 @@ MonoBehaviour:
   m_ColliderType: 1
   ableToMove: 0
   cost: 0
-  surfaceType: 5
+  surfaceType: 0
   IsPowered: 0

@@ -16,7 +16,7 @@ public class SpawnPoint : TileData
         ParticleManager.Instance.SpawnTextScoreParticle(Player.Instance.transform, value_s:"已設置重生點");
         if (tileGameObject.SpawnPoint)
         {
-            Player.Instance.energy += 1;
+            Player.Instance.energy += 3;
             if(Player.Instance.energy >= 3) Player.Instance.energy = 3;
             tileGameObject.SpawnPoint = false;
         }

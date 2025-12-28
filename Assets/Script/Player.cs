@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
 
         foreach (var pair in TileManager.Instance.tileObjects)
         {
-            if(pair.Value.tileData is SpawnPoint)
+            if(pair.Value.tileData is SpawnPoint && pair.Value.transform.position != spawnPoint)
             {
                 pair.Value.SpawnPoint = true;
             }

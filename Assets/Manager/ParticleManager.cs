@@ -9,19 +9,11 @@ public class ParticleManager : MonoBehaviour
 
     public GameObject TextScoreParticle;
 
-    [Header("這個留空，他會自己抓")]
     public Transform ParticleParent;
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void SpawnTextScoreParticle(
