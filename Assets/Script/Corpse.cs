@@ -10,6 +10,11 @@ public class Corpse : MonoBehaviour
 
     public Sprite ele;
 
+    public void Start()
+    {
+        PowerSystem.Instance.Recalculate();
+    }
+
     public bool TryPush(Vector2Int dir)
     {
         Vector3Int target = Cell + (Vector3Int)dir;
@@ -38,7 +43,6 @@ public class Corpse : MonoBehaviour
         // 動畫
         StartCoroutine(PlayMoveAnimIEnum(target));
 
-        PowerSystem.Instance.Recalculate();
         return true;
     }
 
@@ -68,6 +72,7 @@ public class Corpse : MonoBehaviour
         }
         anim.SetBool("isPushing", false);
         transform.position = target_pos;
+        PowerSystem.Instance.Recalculate();
         StartCoroutine(Player.Instance.IsPlayerDieIEnum(Player.Instance.transform.position));
     }
 }
