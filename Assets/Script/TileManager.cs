@@ -57,10 +57,8 @@ public class TileManager : MonoBehaviour
             if (c == null) continue;
             if (tilemap.WorldToCell(c.transform.position) == targetCell)
             {
-                if (!c.GetComponent<Corpse>().TryPush(dir))
-                {
-                    return new MoveResult(false, worldPos, 0, SurfaceType.Normal);
-                }
+                c.GetComponent<Corpse>().TryPush(dir);
+                return new MoveResult(false, worldPos, 0, SurfaceType.Normal);
             }
         }
 

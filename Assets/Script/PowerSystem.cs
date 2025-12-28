@@ -45,13 +45,20 @@ public class PowerSystem : MonoBehaviour
             if (!go.IsPowered) continue;
 
             // 將相鄰電線加入 BFS 起點
-            foreach (var dir in dirs)
-            {
-                Vector3Int next = pos + dir;
-                if (IsConductive(next))
-                    queue.Enqueue(next);
-            }
+            EnqueueAdjacentConductive(pos, queue);
         }
+        foreach (var corpseObj in TileManager.Instance.Corpses)
+        {
+            if (corpseObj == null) continue;
+
+            Corpse corpse = corpseObj.GetComponent<Corpse>();
+            if (corpse == null) continue;
+
+            if (!corpse.conductsPowerIn) continue;
+
+            EnqueueAdjacentConductive(corpse.Cell, queue);
+        }
+
 
         // ---------- Step 2：BFS 傳電 ----------
         while (queue.Count > 0)
@@ -97,6 +104,16 @@ public class PowerSystem : MonoBehaviour
     }
 
     // ======= 小工具 =======
+
+    void EnqueueAdjacentConductive(Vector3Int pos, Queue<Vector3Int> queue)
+    {
+        foreach (var dir in dirs)
+        {
+            Vector3Int next = pos + dir;
+            if (IsConductive(next))
+                queue.Enqueue(next);
+        }
+    }
 
     bool IsWire(Vector3Int pos)
     {

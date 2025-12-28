@@ -10,7 +10,7 @@ public class Corpse : MonoBehaviour
 
     public Sprite ele;
 
-    public bool TryPush(Vector2Int dir)
+    public void TryPush(Vector2Int dir)
     {
         Vector3Int target = Cell + (Vector3Int)dir;
 
@@ -18,14 +18,14 @@ public class Corpse : MonoBehaviour
         TileGameObject currentTile = TileManager.Instance.GetTileObject(Vector3Int.FloorToInt(transform.position));
         TileGameObject targetTile = TileManager.Instance.GetTileObject(target);
         if (targetTile == null || !targetTile.ableToMove)
-            return false;
+            return;
 
         foreach (GameObject c in TileManager.Instance.Corpses)
         {
             if (c == null) continue;
             if (TileManager.Instance.tilemap.WorldToCell(c.transform.position) == target)
             {
-                return false;
+                return;
             }
         }
 
@@ -36,7 +36,7 @@ public class Corpse : MonoBehaviour
         StartCoroutine(PlayMoveAnimIEnum(target));
 
         PowerSystem.Instance.Recalculate();
-        return true;
+        return;
     }
 
     IEnumerator PlayMoveAnimIEnum(Vector3 target_pos)
