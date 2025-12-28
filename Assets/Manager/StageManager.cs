@@ -29,10 +29,10 @@ public class StageManager : MonoBehaviour
         SaveStageState(Vector3.zero);
     }
 
-    public void SaveStageState(Vector3 platerResetPos)
+    public void SaveStageState(Vector3 playerResetPos)
     {
         snapshot = new StageSnapshot();
-        snapshot.playerResetPos = platerResetPos; // (0,0)
+        snapshot.playerResetPos = playerResetPos; // (0,0)
 
         foreach (var pair in TileManager.Instance.tileObjects)
         {
