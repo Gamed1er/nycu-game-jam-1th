@@ -44,7 +44,7 @@ public class TileGameObject : MonoBehaviour
 
         name = tileData.name;
 
-        if(tileData.surfaceType == SurfaceType.Power_In || tileData.surfaceType == SurfaceType.Power_Out)
+        if(tileData.surfaceType == SurfaceType.Power_In || tileData.surfaceType == SurfaceType.Power_Out || tileData.surfaceType == SurfaceType.Decoration)
         {
             GetComponent<SpriteRenderer>().sortingOrder = 3;
         }

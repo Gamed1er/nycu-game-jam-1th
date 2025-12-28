@@ -58,5 +58,6 @@ public enum SurfaceType
     Ice,
     Power_In,
     Power_Node,
-    Power_Out
+    Power_Out,
+    Decoration
 }
