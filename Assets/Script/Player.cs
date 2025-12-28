@@ -55,12 +55,7 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Suicide");
                 //ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
                 energy--;
-                if (energy <= 0) 
-                {
-                    anim.SetBool("isDead", true);
-                    print("sui");
-                    StartCoroutine(PlayerDiedIEnum(transform.position, true));
-                };
+                StartCoroutine(IsPlayerDieIEnum(transform.position));
             }
             else
             {
@@ -112,7 +107,6 @@ public class Player : MonoBehaviour
     {
         Debug.Log("撞牆動畫");
         anim.SetBool("isWalking",false );
-        StartCoroutine(IsPlayerDieIEnum(transform.position));
     }
 
     IEnumerator PlayMoveAnimIEnum(MoveResult moveResult)
@@ -147,7 +141,7 @@ public class Player : MonoBehaviour
         yield return IsPlayerDieIEnum(target_pos);
     }
 
-    IEnumerator IsPlayerDieIEnum(Vector3 targetWorldPos)
+    public IEnumerator IsPlayerDieIEnum(Vector3 targetWorldPos)
     {
         player_can_control = false;
         // 玩家死亡
