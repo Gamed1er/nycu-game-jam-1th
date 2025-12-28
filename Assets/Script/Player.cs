@@ -210,6 +210,7 @@ public class Player : MonoBehaviour
             print("longer");
             yield return new WaitForSeconds(0.5f);
         }
+        AudioManager.Instance.PlaySFX("die_ele");
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("die_ele", false);
         eletric = false;
