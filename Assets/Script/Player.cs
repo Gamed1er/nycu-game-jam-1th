@@ -158,6 +158,7 @@ public class Player : MonoBehaviour
             print("dead");
             anim.SetBool("die_ele", true);
             yield return PlayerEleDiedIEnum(targetWorldPos, false);
+            eletric = false;
         }
         else if (energy <= 0)
         {
@@ -174,6 +175,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
+        eletric = false;
         Debug.Log("die");
         anim.SetBool("isDead", true);
         player_can_control = false;
@@ -184,7 +186,7 @@ public class Player : MonoBehaviour
         }
 
         AudioManager.Instance.PlaySFX("die_normal");
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.15f);
         anim.SetBool("isDead", false);
         TileManager.Instance.SpawnCorpse(targetWorldPos, false);
 
@@ -205,6 +207,7 @@ public class Player : MonoBehaviour
     public IEnumerator PlayerEleDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
         Debug.Log(energy);
+        eletric = false;
         player_can_control = false;
         if (longerAnimation)
         {
@@ -214,7 +217,7 @@ public class Player : MonoBehaviour
         AudioManager.Instance.PlaySFX("die_ele");
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("die_ele", false);
-        eletric = false;
+
         Debug.Log(anim.GetBool("die_ele"));
         TileManager.Instance.SpawnCorpse(targetWorldPos, true);
 
