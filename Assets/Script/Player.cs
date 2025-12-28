@@ -20,24 +20,24 @@ public class Player : MonoBehaviour
     {
         if (player_can_control)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
                 transform.localScale = new Vector3(-1, 1, 1);
                 playerNowDir = new(-1, 0, 0);
                 RequestMove(Vector2Int.left);
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 transform.localScale = new Vector3(1, 1, 1);
                 playerNowDir = new(1, 0, 0);
                 RequestMove(Vector2Int.right);
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S))
             {
                 playerNowDir = new(1, 0, 0);
                 RequestMove(Vector2Int.down);
             }
-            else if (Input.GetKeyDown(KeyCode.W))
+            else if (Input.GetKey(KeyCode.W))
             {
                 playerNowDir = new(-1, 0, 0);
                 RequestMove(Vector2Int.up);
