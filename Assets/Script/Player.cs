@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
                 if (energy <= 0) 
                 {
                     anim.SetBool("isDead", true);
-                    print("sui");
                     StartCoroutine(PlayerDiedIEnum(transform.position, true));
                 };
             }
@@ -108,7 +107,6 @@ public class Player : MonoBehaviour
         if (anim != null && anim.GetBool("isWalking") == false)
         {
             anim.SetBool("isWalking", true);
-            print("iswalking");
         }
 
         Vector3 ori_pos = transform.position;
@@ -133,7 +131,6 @@ public class Player : MonoBehaviour
 
         if (energy <= 0)
         {
-            print("dead");
             anim.SetBool("isDead", true);
             yield return PlayerDiedIEnum(moveResult.targetWorldPos, false);
         }
@@ -149,14 +146,10 @@ public class Player : MonoBehaviour
         player_can_control = false;
         if (longerAnimation)
         {
-            print("longer");
             yield return new WaitForSeconds(0.5f);
         }
-        print("wait");
-        print(anim.GetBool("isDead"));
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("isDead", false);
-        print("endwait");
         TileManager.Instance.SpawnCorpse(targetWorldPos);
 
 
