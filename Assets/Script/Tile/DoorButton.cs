@@ -6,6 +6,7 @@ public class DoorButton : TileData
     public Sprite doorClose, doorOpen;
     public override void OnEntityEnter(TileGameObject tileGameObject)
     {
+        AudioManager.Instance.PlaySFX("plate_on");
         tileGameObject.IsPowered = true; 
         tileGameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
         PowerSystem.Instance.Recalculate();
@@ -13,6 +14,7 @@ public class DoorButton : TileData
 
     public override void OnEntityExit(TileGameObject tileGameObject)
     {
+        AudioManager.Instance.PlaySFX("plate_off");
         tileGameObject.IsPowered = false;
         tileGameObject.GetComponent<SpriteRenderer>().sprite = doorClose;
         PowerSystem.Instance.Recalculate();
