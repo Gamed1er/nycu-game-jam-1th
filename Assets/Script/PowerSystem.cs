@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -132,6 +133,7 @@ public class PowerSystem : MonoBehaviour
         foreach (var corpse in TileManager.Instance.Corpses)
         {
             if (corpse == null) continue;
+            if (corpse.GetComponent<Corpse>().conductsPower == false) continue;
             if (tileMap.WorldToCell(corpse.transform.position) == pos)
                 return true;
         }

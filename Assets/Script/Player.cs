@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
                 TileGameObject currentTile = TileManager.Instance.GetTileObject(targetCell);
                 currentTile.tileData.OnPlayerUse(currentTile);
             }
-            else if (Input.GetKeyDown(KeyCode.Z))
+            else if (Input.GetKeyDown(KeyCode.Z) && energy > 0)
             {
                 anim.SetTrigger("Suicide");
-                ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
+                //ParticleManager.Instance.SpawnTextScoreParticle(transform, value_s:"指令錯誤 ! 機體電量流失中 !", color:Color.red);
                 energy--;
                 if (energy <= 0) 
                 {
@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
+        player_can_control = false;
         if (longerAnimation)
         {
             print("longer");

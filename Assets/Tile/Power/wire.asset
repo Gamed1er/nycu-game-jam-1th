@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cc1d3c1d9e50d4181ed2ea474f702d, type: 3}
   m_Name: wire
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 91b4181204e5ea74e97d9707047be7ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6520ad2f263ccee42b4813c990352adb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
