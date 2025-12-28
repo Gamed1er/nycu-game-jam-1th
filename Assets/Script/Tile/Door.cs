@@ -7,16 +7,15 @@ public class Door : TileData
 
     public override void OnPowerChanged(TileGameObject tileGameObject, bool powered)
     {
+        if(powered != tileGameObject.IsPowered) AudioManager.Instance.PlaySFX("doorOpen", 1f);
         tileGameObject.IsPowered = powered;
         if (powered)
         {
-            AudioManager.Instance.PlaySFX("doorOpen");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
             tileGameObject.ableToMove = true;
         }
         else
         {
-            AudioManager.Instance.PlaySFX("doorClose");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = doorClose;
             tileGameObject.ableToMove = false;
 

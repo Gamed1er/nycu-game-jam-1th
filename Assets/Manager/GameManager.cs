@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
-        SwitchScene("Map");
+        SwitchScene("Stage");
     }
 
     public void GameEnd()
