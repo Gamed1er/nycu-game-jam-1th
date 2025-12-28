@@ -37,3 +37,4 @@ MonoBehaviour:
   ableToMove: 1
   cost: 0
   surfaceType: 1
+  IsPowered: 0
