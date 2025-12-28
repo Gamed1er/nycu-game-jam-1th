@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,7 +14,7 @@ public class TileManager : MonoBehaviour
     [Header("Corpses")]
     public List<GameObject> Corpses = new();
     public GameObject CorpsePrefab;
-    public int max_corpse_count = 5;
+    public int max_corpse_count = 3;
     public Transform CorpseParent;
 
     private void Awake()

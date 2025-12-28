@@ -28449,7 +28449,7 @@ MonoBehaviour:
   backgroundMap: {fileID: 876387821}
   Corpses: []
   CorpsePrefab: {fileID: 2940408363116464760, guid: 4ea0c45b117710c4db32592c6ab3c907, type: 3}
-  max_corpse_count: 5
+  max_corpse_count: 3
   CorpseParent: {fileID: 1481474637}
 --- !u!4 &2138994757
 Transform:
