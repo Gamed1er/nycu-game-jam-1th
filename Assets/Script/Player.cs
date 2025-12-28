@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public Vector3 spawnPoint = new(0, 0, 0);
     public Vector3 playerNowDir = new(0, 0, 0);
     Animator anim;
+    public bool eletric = false;
+
     void Awake()
     {
         Instance = this;
@@ -151,10 +153,10 @@ public class Player : MonoBehaviour
         player_can_control = false;
         // 玩家死亡
         // -999 代表被電死
-        if (energy == -999)
+        if (eletric && energy <=0)
         {
             print("dead");
-            anim.SetBool("isDead", true);
+            anim.SetBool("die_ele", true);
             yield return PlayerEleDiedIEnum(targetWorldPos, false);
         }
         else if (energy <= 0)
@@ -172,6 +174,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
+        Debug.Log("die");
         player_can_control = false;
         if (longerAnimation)
         {
@@ -200,17 +203,17 @@ public class Player : MonoBehaviour
 
     public IEnumerator PlayerEleDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
+        Debug.Log(energy);
         player_can_control = false;
         if (longerAnimation)
         {
             print("longer");
             yield return new WaitForSeconds(0.5f);
         }
-        print("wait");
-        print(anim.GetBool("isDead"));
         yield return new WaitForSeconds(1.1f);
-        anim.SetBool("isDead", false);
-        print("endwait");
+        anim.SetBool("die_ele", false);
+        eletric = false;
+        Debug.Log(anim.GetBool("die_ele"));
         TileManager.Instance.SpawnCorpse(targetWorldPos, true);
 
 
