@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
         total_gameplay_ticks += Time.deltaTime;
     }
 
+    public void GameStart()
+    {
+        SwitchScene("Map");
+    }
+
     public void SwitchScene(string scene)
     {
         SceneManager.LoadScene(scene);

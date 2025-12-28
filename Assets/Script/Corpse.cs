@@ -10,7 +10,7 @@ public class Corpse : MonoBehaviour
 
     public Sprite ele;
 
-    public void TryPush(Vector2Int dir)
+    public bool TryPush(Vector2Int dir)
     {
         Vector3Int target = Cell + (Vector3Int)dir;
 
@@ -18,29 +18,33 @@ public class Corpse : MonoBehaviour
         TileGameObject currentTile = TileManager.Instance.GetTileObject(Vector3Int.FloorToInt(transform.position));
         TileGameObject targetTile = TileManager.Instance.GetTileObject(target);
         if (targetTile == null || !targetTile.ableToMove)
-            return;
+            return false;
 
         foreach (GameObject c in TileManager.Instance.Corpses)
         {
             if (c == null) continue;
             if (TileManager.Instance.tilemap.WorldToCell(c.transform.position) == target)
             {
-                return;
+                return false;
             }
         }
 
         currentTile.tileData.OnEntityExit(currentTile);
         targetTile.tileData.OnEntityEnter(targetTile);
 
+        // 玩家能量 -1
+        Player.Instance.energy -= 1;
+
         // 動畫
         StartCoroutine(PlayMoveAnimIEnum(target));
 
         PowerSystem.Instance.Recalculate();
-        return;
+        return true;
     }
 
     IEnumerator PlayMoveAnimIEnum(Vector3 target_pos)
     {
+        Player.Instance.player_can_control = false;
         Vector3 ori_pos = transform.position;
 
         float distance = Vector3.Distance(ori_pos, target_pos);
@@ -59,5 +63,6 @@ public class Corpse : MonoBehaviour
         }
 
         transform.position = target_pos;
+        Player.Instance.player_can_control = true;
     }
 }

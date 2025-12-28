@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    bool player_can_control = true;
+    public bool player_can_control = true;
     public int energy = 3;
 
     public Vector3 spawnPoint = new(0, 0, 0);
@@ -20,24 +20,24 @@ public class Player : MonoBehaviour
     {
         if (player_can_control)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 transform.localScale = new Vector3(-1, 1, 1);
                 playerNowDir = new(-1, 0, 0);
                 RequestMove(Vector2Int.left);
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D))
             {
                 transform.localScale = new Vector3(1, 1, 1);
                 playerNowDir = new(1, 0, 0);
                 RequestMove(Vector2Int.right);
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 playerNowDir = new(1, 0, 0);
                 RequestMove(Vector2Int.down);
             }
-            else if (Input.GetKey(KeyCode.W))
+            else if (Input.GetKeyDown(KeyCode.W))
             {
                 playerNowDir = new(-1, 0, 0);
                 RequestMove(Vector2Int.up);
@@ -111,11 +111,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("撞牆動畫");
         anim.SetBool("isWalking",false );
-    }
-
-    void OnCharge()
-    {
-        Debug.Log("充電");
+        StartCoroutine(IsPlayerDieIEnum(transform.position));
     }
 
     IEnumerator PlayMoveAnimIEnum(MoveResult moveResult)
@@ -125,7 +121,7 @@ public class Player : MonoBehaviour
         if (anim != null && anim.GetBool("isWalking") == false)
         {
             anim.SetBool("isWalking", true);
-            print("iswalking");
+            print("isWalking");
         }
 
         Vector3 ori_pos = transform.position;
@@ -147,20 +143,25 @@ public class Player : MonoBehaviour
         }
 
         transform.position = target_pos;
+        yield return IsPlayerDieIEnum(target_pos);
+    }
 
+    IEnumerator IsPlayerDieIEnum(Vector3 targetWorldPos)
+    {
+        player_can_control = false;
         // 玩家死亡
         // -999 代表被電死
         if (energy == -999)
         {
             print("dead");
             anim.SetBool("isDead", true);
-            yield return PlayerEleDiedIEnum(moveResult.targetWorldPos, false);
+            yield return PlayerEleDiedIEnum(targetWorldPos, false);
         }
         else if (energy <= 0)
         {
             print("dead");
             anim.SetBool("isDead", true);
-            yield return PlayerDiedIEnum(moveResult.targetWorldPos, false);
+            yield return PlayerDiedIEnum(targetWorldPos, false);
         }
         else
         {
