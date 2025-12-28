@@ -83,23 +83,23 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    public void PlaySFX(string key)
+    public void PlaySFX(string key, float volumeScale = 1f)
     {
-        if (!sfxDict.ContainsKey(key))
+        if (!sfxDict.TryGetValue(key, out var clip))
         {
             Debug.LogWarning($"SFX not found: {key}");
             return;
         }
-
-        sfxSource.PlayOneShot(sfxDict[key], sfxVolume);
+        float finalVolume = Mathf.Clamp01(sfxVolume * volumeScale);
+        sfxSource.PlayOneShot(clip, finalVolume);
     }
 
-    public void PlaySFXCooldown(string key, float cooldownSec)
+    public void PlaySFXCooldown(string key, float cooldownSec, float volumeScale = 1f)
     {
         float now = Time.time;
         if (_nextTime.TryGetValue(key, out float t) && now < t) return;
 
-        PlaySFX(key);
+        PlaySFX(key, volumeScale);
         _nextTime[key] = now + cooldownSec;
     }
 

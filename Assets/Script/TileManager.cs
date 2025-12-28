@@ -6,7 +6,7 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager Instance;
 
-    public Tilemap tilemap;
+    public Tilemap tilemap, backgroundMap;
 
     [Header("Tile Objects")]
     public Dictionary<Vector3Int, TileGameObject> tileObjects = new();
@@ -20,6 +20,7 @@ public class TileManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        backgroundMap.GetComponent<TilemapRenderer>().sortingOrder = 1;
     }
 
     #region TileGameObject 管理

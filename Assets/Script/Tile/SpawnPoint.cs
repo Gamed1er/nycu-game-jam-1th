@@ -11,6 +11,7 @@ public class SpawnPoint : TileData
 
     public override void OnEntityEnter(TileGameObject tileGameObject)
     {
+        AudioManager.Instance.PlaySFX("recharge",0.8f);
         Player.Instance.spawnPoint = transform.GetPosition();
         ParticleManager.Instance.SpawnTextScoreParticle(Player.Instance.transform, value_s:"已設置重生點");
         if (tileGameObject.SpawnPoint)

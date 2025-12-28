@@ -63,6 +63,6 @@ public class Corpse : MonoBehaviour
         }
 
         transform.position = target_pos;
-        Player.Instance.player_can_control = true;
+        StartCoroutine(Player.Instance.IsPlayerDieIEnum(Player.Instance.transform.position));
     }
 }
