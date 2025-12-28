@@ -161,7 +161,7 @@ public class Player : MonoBehaviour
         }
         else if (energy <= 0)
         {
-            print("dead");
+            print("dead noraml");
             anim.SetBool("isDead", true);
             yield return PlayerDiedIEnum(targetWorldPos, false);
         }
@@ -175,6 +175,7 @@ public class Player : MonoBehaviour
     public IEnumerator PlayerDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
     {
         Debug.Log("die");
+        anim.SetBool("isDead", true);
         player_can_control = false;
         if (longerAnimation)
         {
