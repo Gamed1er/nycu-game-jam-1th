@@ -51,7 +51,15 @@ MonoBehaviour:
   bgmVolume: 1
   sfxVolume: 1
   bgmList: []
-  sfxList: []
+  sfxList:
+  - key: walk
+    clip: {fileID: 8300000, guid: 33814f69dfa3c0444be86487d6cb8960, type: 3}
+  - key: die_normal
+    clip: {fileID: 8300000, guid: eb22efedc92e1b14d95443b1e3ea628f, type: 3}
+  - key: die_ele
+    clip: {fileID: 8300000, guid: 572d7358a4955c24ebce7a0caf84e51f, type: 3}
+  - key: recharge
+    clip: {fileID: 8300000, guid: 777651dc5fe443e479f056be137da1df, type: 3}
 --- !u!1 &5027698167940444068
 GameObject:
   m_ObjectHideFlags: 0
