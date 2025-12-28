@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
         }
 
         transform.position = target_pos;
-        yield return new WaitForSeconds(0.22f);
+        yield return new WaitForSeconds(0.21f);
         anim.SetBool("isWalking", false);
 
         yield return IsPlayerDieIEnum(target_pos);

@@ -46,10 +46,15 @@ public class Corpse : MonoBehaviour
     {
         Player.Instance.player_can_control = false;
         Vector3 ori_pos = transform.position;
-
+        Animator anim = Player.Instance.GetComponent<Animator>();
+        Debug.Log(anim.GetCurrentAnimatorStateInfo(0));
+        anim.SetBool("isPushing", true);
+        Debug.Log(anim.GetCurrentAnimatorStateInfo(0));
         float distance = Vector3.Distance(ori_pos, target_pos);
         float duration = 0.1f * distance;
         float elapsed = 0f;
+        Debug.Log("wait");
+        yield return new WaitForSeconds(0.2f);
 
         while (elapsed < duration)
         {
@@ -61,7 +66,7 @@ public class Corpse : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
+        anim.SetBool("isPushing", false);
         transform.position = target_pos;
         StartCoroutine(Player.Instance.IsPlayerDieIEnum(Player.Instance.transform.position));
     }
