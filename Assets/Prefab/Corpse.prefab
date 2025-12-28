@@ -98,3 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conductsPower: 1
+  conductsPowerIn: 0
+  ele: {fileID: 21300000, guid: 7acf48450a23b344c8970271f65ed3fd, type: 3}

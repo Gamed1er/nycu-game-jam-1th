@@ -103,16 +103,22 @@ public class TileManager : MonoBehaviour
 
     #region Corpse
 
-    public void SpawnCorpse(Vector3 location)
+    public void SpawnCorpse(Vector3 location, bool ele)
     {
         if (Corpses.Count >= max_corpse_count)
         {
             KillCorpse(Corpses[0]);
-            Corpses.RemoveAt(0);
+            //Corpses.RemoveAt(0);
         }
 
         GameObject corpse = Instantiate(CorpsePrefab, location, Quaternion.identity, CorpseParent);
         Corpses.Add(corpse);
+        if (ele)
+        {
+            corpse.GetComponent<Corpse>().conductsPower = false;
+            corpse.GetComponent<Corpse>().conductsPowerIn = true;
+            corpse.GetComponent<SpriteRenderer>().sprite = corpse.GetComponent<Corpse>().ele;
+        }
 
         Vector3Int cell = tilemap.WorldToCell(location);
         GetTileObject(cell)?.tileData.OnEntityEnter(GetTileObject(cell));
@@ -125,6 +131,7 @@ public class TileManager : MonoBehaviour
         Vector3Int cell = tilemap.WorldToCell(target.transform.position);
         GetTileObject(cell)?.tileData.OnEntityExit(GetTileObject(cell));
 
+        Corpses.Remove(target);
         Destroy(target);
     }
 

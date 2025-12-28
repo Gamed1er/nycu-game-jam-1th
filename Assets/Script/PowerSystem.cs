@@ -89,6 +89,7 @@ public class PowerSystem : MonoBehaviour
 
             bool powered = poweredOutputs.Contains(pos);
             (go.tileData as Door)?.OnPowerChanged(go, powered);
+            (go.tileData as Electric)?.OnPowerChanged(go, powered);
         }
 
         // （可選）更新電線顯示

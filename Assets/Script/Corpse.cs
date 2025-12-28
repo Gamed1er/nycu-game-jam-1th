@@ -4,9 +4,11 @@ using UnityEngine;
 public class Corpse : MonoBehaviour
 {
     public bool conductsPower = true;
-
+    public bool conductsPowerIn = false;
     public Vector3Int Cell =>
         TileManager.Instance.tilemap.WorldToCell(transform.position);
+
+    public Sprite ele;
 
     public bool TryPush(Vector2Int dir)
     {

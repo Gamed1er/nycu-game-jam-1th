@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
                 if (energy <= 0) 
                 {
                     anim.SetBool("isDead", true);
+                    print("sui");
                     StartCoroutine(PlayerDiedIEnum(transform.position, true));
                 };
             }
@@ -80,7 +81,19 @@ public class Player : MonoBehaviour
 
         PlayMoveAnim(result);
 
-        energy -= result.total_cost;
+        // 周圍有充電裝就不會受傷害
+        bool player_immune_damage = false;
+        foreach(var c in TileManager.Instance.Corpses)
+        {
+            if(c == null) continue;
+            if(!c.GetComponent<Corpse>().conductsPowerIn) continue;
+            if(Mathf.Abs(c.transform.position.x - result.targetWorldPos.x) <= 1.5 && Mathf.Abs(c.transform.position.y - result.targetWorldPos.y) <= 1.5)
+            {
+                player_immune_damage = true;
+                break;
+            }
+        }
+        if(!player_immune_damage) energy -= result.total_cost;
         
     }
 
@@ -107,6 +120,7 @@ public class Player : MonoBehaviour
         if (anim != null && anim.GetBool("isWalking") == false)
         {
             anim.SetBool("isWalking", true);
+            print("iswalking");
         }
 
         Vector3 ori_pos = transform.position;
@@ -129,8 +143,17 @@ public class Player : MonoBehaviour
 
         transform.position = target_pos;
 
-        if (energy <= 0)
+        // 玩家死亡
+        // -999 代表被電死
+        if (energy == -999)
         {
+            print("dead");
+            anim.SetBool("isDead", true);
+            yield return PlayerEleDiedIEnum(moveResult.targetWorldPos, false);
+        }
+        else if (energy <= 0)
+        {
+            print("dead");
             anim.SetBool("isDead", true);
             yield return PlayerDiedIEnum(moveResult.targetWorldPos, false);
         }
@@ -146,11 +169,36 @@ public class Player : MonoBehaviour
         player_can_control = false;
         if (longerAnimation)
         {
+            print("longer");
             yield return new WaitForSeconds(0.5f);
         }
+        print("wait");
+        print(anim.GetBool("isDead"));
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("isDead", false);
-        TileManager.Instance.SpawnCorpse(targetWorldPos);
+        print("endwait");
+        TileManager.Instance.SpawnCorpse(targetWorldPos, false);
+
+
+        transform.position = spawnPoint;
+        energy = 3;
+        player_can_control = true;
+    }
+
+    public IEnumerator PlayerEleDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
+    {
+        player_can_control = false;
+        if (longerAnimation)
+        {
+            print("longer");
+            yield return new WaitForSeconds(0.5f);
+        }
+        print("wait");
+        print(anim.GetBool("isDead"));
+        yield return new WaitForSeconds(1.1f);
+        anim.SetBool("isDead", false);
+        print("endwait");
+        TileManager.Instance.SpawnCorpse(targetWorldPos, true);
 
 
         transform.position = spawnPoint;
