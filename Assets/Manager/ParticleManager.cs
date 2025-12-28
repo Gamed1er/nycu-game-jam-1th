@@ -23,9 +23,7 @@ public class ParticleManager : MonoBehaviour
     Color? color = null,
     TextParticleType textParticleType = TextParticleType.DropDown)
     {
-        ParticleParent = FindFirstObjectByType<Canvas>().transform;
-
-        Canvas canvas = ParticleParent.GetComponentInParent<Canvas>();
+        Canvas canvas = ParticleParent.GetComponent<Canvas>();
         RectTransform canvasRect = canvas.transform as RectTransform;
 
         // World → Screen

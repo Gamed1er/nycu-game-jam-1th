@@ -64,6 +64,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 87a45daa7b61e194a97be9701f5dbac0, type: 3}
   - key: plate_off
     clip: {fileID: 8300000, guid: c6b30cb6ad348564dbad5bf5cd41e721, type: 3}
+  - key: doorOpen
+    clip: {fileID: 8300000, guid: 3fb73465ed993214eb0075a46140be6c, type: 3}
+  - key: doorClose
+    clip: {fileID: 8300000, guid: 3966fdd06aeacc94ba5bf4266f3d0450, type: 3}
 --- !u!1 &5027698167940444068
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,11 +10,13 @@ public class Door : TileData
         tileGameObject.IsPowered = powered;
         if (powered)
         {
+            AudioManager.Instance.PlaySFX("doorOpen");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
             tileGameObject.ableToMove = true;
         }
         else
         {
+            AudioManager.Instance.PlaySFX("doorClose");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = doorClose;
             tileGameObject.ableToMove = false;
 
