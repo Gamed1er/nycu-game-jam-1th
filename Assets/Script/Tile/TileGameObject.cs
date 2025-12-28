@@ -14,9 +14,11 @@ public class TileGameObject : MonoBehaviour
     
     [Header("SurfaceType")]
     public SurfaceType surfaceType;
+    
 
     [Header("Power")]
     public bool IsPowered;
+    public bool SpawnPoint = false;
 
     void Start()
     {

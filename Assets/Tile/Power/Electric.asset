@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402879956e914ff4dbe3deec5c48e36e, type: 3}
   m_Name: Electric
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b8a8b91e348001e49906ce17cb81e5f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,9 +31,12 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 941153151918755350, guid: 84076d1fefed46b4a81d5156b0bc974e, type: 3}
   m_Flags: 1
   m_ColliderType: 1
   ableToMove: 1
   cost: 0
-  surfaceType: 0
+  surfaceType: 4
+  IsPowered: 0
+  electricOn: {fileID: 21300000, guid: d89e76c46a46a7143805006873abee1b, type: 3}
+  electricOff: {fileID: 21300000, guid: b8a8b91e348001e49906ce17cb81e5f3, type: 3}

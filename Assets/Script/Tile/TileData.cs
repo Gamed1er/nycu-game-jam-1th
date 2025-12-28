@@ -15,6 +15,12 @@ public class TileData : Tile
     [Header("Power")]
     public bool IsPowered = false;
 
+
+    public virtual void OnStart(TileGameObject tileGameObject)
+    {
+        
+    }
+
     public virtual void OnEntityEnter(TileGameObject tileGameObject)
     {
         

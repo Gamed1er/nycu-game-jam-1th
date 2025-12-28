@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoorButton
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 1ba5f6f5aa7ae9f45aebbb9fc9de2359, type: 3}
-  m_Color: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -37,3 +37,6 @@ MonoBehaviour:
   ableToMove: 1
   cost: 0
   surfaceType: 2
+  IsPowered: 0
+  doorClose: {fileID: 21300000, guid: 1ba5f6f5aa7ae9f45aebbb9fc9de2359, type: 3}
+  doorOpen: {fileID: 21300000, guid: 211979eeeb4fb85458aa161c9fb6f08c, type: 3}

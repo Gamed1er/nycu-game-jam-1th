@@ -3,10 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SpawnPoint", menuName = "Tile/SpawnPoint")]
 public class SpawnPoint : TileData
 {
+    public override void OnStart(TileGameObject tileGameObject)
+    {
+        tileGameObject.SpawnPoint = true;
+        base.OnStart(tileGameObject);
+    }
+
     public override void OnEntityEnter(TileGameObject tileGameObject)
     {
         Player.Instance.spawnPoint = transform.GetPosition();
         ParticleManager.Instance.SpawnTextScoreParticle(Player.Instance.transform, value_s:"已設置重生點");
+        if (tileGameObject.SpawnPoint)
+        {
+            Player.Instance.energy += 1;
+            if(Player.Instance.energy >= 3) Player.Instance.energy = 3;
+            tileGameObject.SpawnPoint = false;
+        }
         base.OnEntityEnter(tileGameObject);
     }
 }

@@ -183,6 +183,14 @@ public class Player : MonoBehaviour
         transform.position = spawnPoint;
         energy = 3;
         player_can_control = true;
+
+        foreach (var pair in TileManager.Instance.tileObjects)
+        {
+            if(pair.Value.tileData is SpawnPoint)
+            {
+                pair.Value.SpawnPoint = true;
+            }
+        } 
     }
 
     public IEnumerator PlayerEleDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
@@ -204,5 +212,13 @@ public class Player : MonoBehaviour
         transform.position = spawnPoint;
         energy = 3;
         player_can_control = true;
+
+        foreach (var pair in TileManager.Instance.tileObjects)
+        {
+            if(pair.Value.tileData is SpawnPoint)
+            {
+                pair.Value.SpawnPoint = true;
+            }
+        } 
     }
 }

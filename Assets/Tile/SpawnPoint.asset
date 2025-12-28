@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01b931c216fdfb4b8de57e8a36d19ad, type: 3}
   m_Name: SpawnPoint
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 80961de7ff2c68d4cadb80ecfad27fa0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 043994c3d3ba137408201e5de1404ae5, type: 3}
   m_Color: {r: 0.4584905, g: 1, b: 0.99888504, a: 1}
   m_Transform:
     e00: 1
@@ -37,3 +37,4 @@ MonoBehaviour:
   ableToMove: 1
   cost: 0
   surfaceType: 0
+  IsPowered: 0
