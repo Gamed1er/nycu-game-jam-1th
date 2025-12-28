@@ -707,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.data[0].key
@@ -727,7 +727,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.data[4].key
-      value: die_ele
+      value: plate_on
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[5].key
+      value: plate_off
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[6].key
+      value: recharge
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.data[3].clip
@@ -736,7 +744,15 @@ PrefabInstance:
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.data[4].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 572d7358a4955c24ebce7a0caf84e51f, type: 3}
+      objectReference: {fileID: 8300000, guid: 87a45daa7b61e194a97be9701f5dbac0, type: 3}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c6b30cb6ad348564dbad5bf5cd41e721, type: 3}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 777651dc5fe443e479f056be137da1df, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
