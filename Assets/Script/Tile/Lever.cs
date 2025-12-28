@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Lever", menuName = "Tile/Lever")]
 public class Lever : TileData
 {
+    public Sprite leverOn, leverOff;
     public override void OnPlayerUse(TileGameObject tileGameObject)
     {
         tileGameObject.IsPowered = !tileGameObject.IsPowered;
@@ -11,6 +12,15 @@ public class Lever : TileData
         if (Player.Instance.energy <= 0)
         {
             Player.Instance.StartCoroutine(Player.Instance.PlayerDiedIEnum(Player.Instance.transform.position));
+        }
+
+        if (tileGameObject.IsPowered)
+        {
+            tileGameObject.GetComponent<SpriteRenderer>().sprite = leverOn;
+        }
+        else
+        {
+            tileGameObject.GetComponent<SpriteRenderer>().sprite = leverOff;
         }
     }
 
