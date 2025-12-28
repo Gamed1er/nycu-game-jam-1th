@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         SwitchScene("Map");
     }
 
+    public void GameEnd()
+    {
+        SwitchScene("End");
+    }
+
     public void SwitchScene(string scene)
     {
         SceneManager.LoadScene(scene);
