@@ -66,6 +66,11 @@ public class Player : MonoBehaviour
             {
                 anim.SetBool("isWalking",false);
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StageManager.Instance.ResetStage();
+            }
         }
     }
 

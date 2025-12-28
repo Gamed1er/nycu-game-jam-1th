@@ -40,6 +40,16 @@ public class TileData : Tile
     {
         
     }
+
+    public virtual object SerializeState(TileGameObject tileGameObject)
+    {
+        return false;
+    }
+
+    public virtual void DeserializeState(TileGameObject tileGameObject, object state)
+    {
+        
+    }
 }
 
 public enum SurfaceType

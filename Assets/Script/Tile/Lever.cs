@@ -13,4 +13,14 @@ public class Lever : TileData
             Player.Instance.StartCoroutine(Player.Instance.PlayerDiedIEnum(Player.Instance.transform.position));
         }
     }
+
+    public override object SerializeState(TileGameObject tileGameObject)
+    {
+        return tileGameObject.IsPowered;
+    }
+
+    public override void DeserializeState(TileGameObject tileGameObject, object state)
+    {
+        tileGameObject.IsPowered = (bool)state;
+    }
 }

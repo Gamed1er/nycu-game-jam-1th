@@ -21,4 +21,9 @@ public class SpawnPoint : TileData
         }
         base.OnEntityEnter(tileGameObject);
     }
+
+    public override void DeserializeState(TileGameObject tileGameObject, object state)
+    {
+        tileGameObject.SpawnPoint = true;
+    }
 }

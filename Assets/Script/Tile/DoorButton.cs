@@ -17,4 +17,9 @@ public class DoorButton : TileData
         tileGameObject.GetComponent<SpriteRenderer>().sprite = doorClose;
         PowerSystem.Instance.Recalculate();
     }
+
+    public override void DeserializeState(TileGameObject tileGameObject, object state)
+    {
+        tileGameObject.IsPowered = false;
+    }
 }
