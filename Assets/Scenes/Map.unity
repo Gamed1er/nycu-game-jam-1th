@@ -707,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
       propertyPath: sfxList.Array.data[0].key
@@ -721,6 +721,22 @@ PrefabInstance:
       propertyPath: sfxList.Array.data[2].key
       value: die_ele
       objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[3].key
+      value: recharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[4].key
+      value: die_ele
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 777651dc5fe443e479f056be137da1df, type: 3}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 572d7358a4955c24ebce7a0caf84e51f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
