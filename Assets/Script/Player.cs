@@ -190,7 +190,6 @@ public class Player : MonoBehaviour
         anim.SetBool("isDead", false);
         TileManager.Instance.SpawnCorpse(targetWorldPos, false);
 
-
         transform.position = spawnPoint;
         energy = 3;
         player_can_control = true;
@@ -201,7 +200,8 @@ public class Player : MonoBehaviour
             {
                 pair.Value.SpawnPoint = true;
             }
-        } 
+        }
+        TileManager.Instance.GetTileObject(new Vector3Int((int)spawnPoint.x, (int)spawnPoint.y)).tileData.OnEntityEnter(TileManager.Instance.GetTileObject(new Vector3Int((int)spawnPoint.x, (int)spawnPoint.y)));
     }
 
     public IEnumerator PlayerEleDiedIEnum(Vector3 targetWorldPos, bool longerAnimation = false)
