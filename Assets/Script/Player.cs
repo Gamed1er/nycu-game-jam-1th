@@ -34,12 +34,12 @@ public class Player : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                playerNowDir = new(1, 0, 0);
+                playerNowDir = new(0, 1, 0);
                 RequestMove(Vector2Int.down);
             }
             else if (Input.GetKey(KeyCode.W))
             {
-                playerNowDir = new(-1, 0, 0);
+                playerNowDir = new(0, -1, 0);
                 RequestMove(Vector2Int.up);
             }
             else if (Input.GetKeyDown(KeyCode.E))
