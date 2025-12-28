@@ -22,7 +22,8 @@ public class TileGameObject : MonoBehaviour
 
     void Start()
     {
-        
+        if(transform.position.x == -15 && transform.position.y == 5) Debug.Log("wire");
+
         if(transform.parent.name != "TileMap")
         {
             tileData = wire;
