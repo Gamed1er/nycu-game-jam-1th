@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.PlaySFXCooldown("walk", 0.22f);
         PlayMoveAnim(result);
 
         // 周圍有充電裝就不會受傷害
@@ -178,11 +179,10 @@ public class Player : MonoBehaviour
             print("longer");
             yield return new WaitForSeconds(0.5f);
         }
-        print("wait");
-        print(anim.GetBool("isDead"));
+
+        AudioManager.Instance.PlaySFX("die_normal");
         yield return new WaitForSeconds(1.1f);
         anim.SetBool("isDead", false);
-        print("endwait");
         TileManager.Instance.SpawnCorpse(targetWorldPos, false);
 
 

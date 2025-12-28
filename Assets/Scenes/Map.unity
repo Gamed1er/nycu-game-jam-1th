@@ -461,6 +461,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: bgmList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[0].key
+      value: walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[1].key
+      value: die_normal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393124112873411580, guid: 9e3105060c9214c48a746f383e4a47db, type: 3}
+      propertyPath: sfxList.Array.data[2].key
+      value: die_ele
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
