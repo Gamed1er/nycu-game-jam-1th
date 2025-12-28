@@ -73,7 +73,7 @@ public class PowerSystem : MonoBehaviour
                 Vector3Int next = curr + dir;
 
                 // 繼續沿著電線傳
-                if (IsWire(next) && !poweredWires.Contains(next))
+                if (IsConductive(next) && !poweredWires.Contains(next))
                 {
                     queue.Enqueue(next);
                 }

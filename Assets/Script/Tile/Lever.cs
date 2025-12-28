@@ -16,10 +16,12 @@ public class Lever : TileData
 
         if (tileGameObject.IsPowered)
         {
+            AudioManager.Instance.PlaySFX("plate_on");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = leverOn;
         }
         else
         {
+            AudioManager.Instance.PlaySFX("plate_off");
             tileGameObject.GetComponent<SpriteRenderer>().sprite = leverOff;
         }
     }

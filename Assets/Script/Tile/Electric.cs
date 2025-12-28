@@ -11,6 +11,7 @@ public class Electric : TileData
             return;
 
         // 1. 殺玩家
+        Player.Instance.eletric = true;
         Player.Instance.energy = -999;
     }
 
