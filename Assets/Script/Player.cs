@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
         }
 
         transform.position = target_pos;
-        yield return new WaitForSeconds(0.21f);
+        yield return new WaitForSeconds(0.15f);
         anim.SetBool("isWalking", false);
 
         yield return IsPlayerDieIEnum(target_pos);
