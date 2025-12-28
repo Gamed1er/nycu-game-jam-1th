@@ -36,6 +36,7 @@ public class TileGameObject : MonoBehaviour
         ableToMove = tileData.ableToMove;
         cost = tileData.cost;
         surfaceType = tileData.surfaceType;
+        IsPowered = tileData.IsPowered;
 
         GetComponent<SpriteRenderer>().sprite = tileData.sprite;
 

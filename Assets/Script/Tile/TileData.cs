@@ -12,6 +12,9 @@ public class TileData : Tile
     
     public SurfaceType surfaceType;
 
+    [Header("Power")]
+    public bool IsPowered = false;
+
     public virtual void OnEntityEnter(TileGameObject tileGameObject)
     {
         

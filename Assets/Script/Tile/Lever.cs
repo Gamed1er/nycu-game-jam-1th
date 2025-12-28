@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Lever", menuName = "Tile/Lever")]
 public class Lever : TileData
 {
-
     public override void OnPlayerUse(TileGameObject tileGameObject)
     {
         tileGameObject.IsPowered = !tileGameObject.IsPowered;
