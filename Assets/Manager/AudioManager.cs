@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
     Dictionary<string, AudioClip> bgmDict;
     Dictionary<string, AudioClip> sfxDict;
 
+    private readonly Dictionary<string, float> _nextTime = new();
+
     void Awake()
     {
         if (Instance != null)
@@ -90,6 +92,15 @@ public class AudioManager : MonoBehaviour
         }
 
         sfxSource.PlayOneShot(sfxDict[key], sfxVolume);
+    }
+
+    public void PlaySFXCooldown(string key, float cooldownSec)
+    {
+        float now = Time.time;
+        if (_nextTime.TryGetValue(key, out float t) && now < t) return;
+
+        PlaySFX(key);
+        _nextTime[key] = now + cooldownSec;
     }
 
     /* ================= 音量控制 ================= */
