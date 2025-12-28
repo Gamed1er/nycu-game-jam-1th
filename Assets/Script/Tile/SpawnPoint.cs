@@ -20,7 +20,7 @@ public class SpawnPoint : TileData
             if(Player.Instance.energy >= 3) Player.Instance.energy = 3;
             tileGameObject.SpawnPoint = false;
         }
-        StageManager.Instance.SaveStageState(tileGameObject.transform.position);
+        //StageManager.Instance.SaveStageState(tileGameObject.transform.position);
         base.OnEntityEnter(tileGameObject);
     }
 
