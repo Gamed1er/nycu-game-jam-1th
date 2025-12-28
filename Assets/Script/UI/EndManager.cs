@@ -73,6 +73,6 @@ public class EndManager : MonoBehaviour
     // 給 Button 用
     public void BackToTitle()
     {
-        SceneManager.LoadScene("Title"); // 換成你的首頁場景名
+        SceneManager.LoadScene("Lobby"); // 換成你的首頁場景名
     }
 }
