@@ -199,6 +199,7 @@ public class Player : MonoBehaviour
             if(pair.Value.tileData is SpawnPoint)
             {
                 pair.Value.SpawnPoint = true;
+                pair.Value.tileData.DeserializeState(pair.Value, null);
             }
         }
         TileManager.Instance.GetTileObject(new Vector3Int((int)spawnPoint.x, (int)spawnPoint.y)).tileData.OnEntityEnter(TileManager.Instance.GetTileObject(new Vector3Int((int)spawnPoint.x, (int)spawnPoint.y)));

@@ -38,3 +38,5 @@ MonoBehaviour:
   cost: 0
   surfaceType: 5
   IsPowered: 0
+  powerimg: {fileID: 21300000, guid: 043994c3d3ba137408201e5de1404ae5, type: 3}
+  unpowerimg: {fileID: 21300000, guid: 85ddfa0240aed484bb1d06d74254bd32, type: 3}

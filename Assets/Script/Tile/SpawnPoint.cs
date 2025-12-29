@@ -1,8 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpawnPoint", menuName = "Tile/SpawnPoint")]
 public class SpawnPoint : TileData
 {
+
+    public Sprite powerimg, unpowerimg;
     public override void OnStart(TileGameObject tileGameObject)
     {
         tileGameObject.SpawnPoint = true;
@@ -19,6 +21,7 @@ public class SpawnPoint : TileData
             Player.Instance.energy += 3;
             if(Player.Instance.energy >= 3) Player.Instance.energy = 3;
             tileGameObject.SpawnPoint = false;
+            tileGameObject.gameObject.GetComponent<SpriteRenderer>().sprite = unpowerimg;
         }
         //StageManager.Instance.SaveStageState(tileGameObject.transform.position);
         base.OnEntityEnter(tileGameObject);
@@ -27,5 +30,8 @@ public class SpawnPoint : TileData
     public override void DeserializeState(TileGameObject tileGameObject, object state)
     {
         tileGameObject.SpawnPoint = true;
+        tileGameObject.gameObject.GetComponent<SpriteRenderer>().sprite = powerimg;
     }
+
+
 }
